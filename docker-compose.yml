@@ -3,7 +3,6 @@ version : '3.7'
 services:
     app:
         build: ./.docker/php
-        container_name: "my-app"
         networks:
             - backend-net
         working_dir: /var/www
@@ -13,7 +12,6 @@ services:
     #Nginx Service
     nginx:
         image: nginx:alpine
-        container_name: my-nginx
         ports:
             - "80:80"
             - "443:443"
@@ -26,7 +24,6 @@ services:
             - backend-net
 
     db:
-        container_name: "my-db"
         image: mysql:8
         ports:
             - "3309:3306"
@@ -37,13 +34,14 @@ services:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: app
 
-    memcached:
-        container_name: "my-memcached"
-        image: memcached:alpine
-        networks:
-            - backend-net
+    redis:
+      image: 'redis:alpine'
+      ports:
+        - '6383:6379'
+      networks:
+        - backend-net
+        
     phpmyadmin:
-        container_name: "my-phpmyadmin"
         image: phpmyadmin/phpmyadmin
         ports:
           - "8183:80"
