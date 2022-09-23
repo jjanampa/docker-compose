@@ -1,4 +1,4 @@
-FROM node:14.17.1 AS node
+FROM node:16.15.1 AS node
 FROM php:8.1-fpm
 
 # Install system dependencies
@@ -8,12 +8,10 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libmemcached-dev \
     libzip-dev \
     libcurl4-openssl-dev \
     zip \
     unzip \
-    rsync \
     supervisor
 
 # Clear cache
